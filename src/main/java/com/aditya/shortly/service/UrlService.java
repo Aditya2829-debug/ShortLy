@@ -1,5 +1,6 @@
 package com.aditya.shortly.service;
 
+import com.aditya.shortly.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -12,8 +13,16 @@ public class UrlService {
 
     private final SecureRandom secure=new SecureRandom();
 
+    private final UrlRepository urlRepository;
+
+    public UrlService(UrlRepository urlRepository) {
+        this.urlRepository = urlRepository;
+    }
+
     public String createShortUrl(String originalUrl) {
-        return generateShortCode();
+        String shortcode= generateShortCode();
+        urlRepository.saveUrl(shortcode,originalUrl);
+        return shortcode;
     }
     private String generateShortCode(){
         StringBuilder code=new StringBuilder(CODE_LENGTH);
