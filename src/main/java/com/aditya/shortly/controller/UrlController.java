@@ -15,7 +15,7 @@ public class UrlController {
     }
 
     @PostMapping("/api/v1/urls")
-    public String CreateShortUrlRequest(@RequestBody CreateShortUrlRequest request){
+    public String createShortUrl(@RequestBody CreateShortUrlRequest request){
         return urlService.createShortUrl(request.getUrl());
     }
 }
