@@ -4,6 +4,7 @@ import com.aditya.shortly.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.util.Optional;
 
 @Service
 public class UrlService {
@@ -31,5 +32,8 @@ public class UrlService {
             code.append(BASE62_ALPHABET.charAt(random));
         }
         return code.toString();
+    }
+    public Optional<String> getOriginalUrl(String shortCode){
+        return urlRepository.getOriginalUrl(shortCode);
     }
 }
